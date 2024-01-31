@@ -1,4 +1,4 @@
-# ![[tktk Module Name] - Setup](./assets/hero.png)
+# ![MEN Stack Relating Data Lab - Cookbook - Setup](./assets/hero.png)
 
 ## Setup
 
