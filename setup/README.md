@@ -12,7 +12,7 @@ cd ~/code/ga/labs
 
 This lab uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
 
-Navigate to [MEN Stack Auth template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
+Navigate to the [MEN Stack Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
 
 ```bash
 git clone git@git.generalassemb.ly:modular-curriculum-all-courses/men-stack-session-auth-template.git
@@ -52,7 +52,7 @@ Make a new repository on [GitHub](https://github.com/) named `men-stack-relating
 Link your local project to your remote GitHub repo:
 
 ```bash
-git remote add origin https://git.generalassemb.ly/<github-username>/men-stack-relating-data-lab-cookbook.git
+git remote add origin https://github.com/<github-username>/men-stack-relating-data-lab-cookbook.git
 git push origin main
 ```
 
