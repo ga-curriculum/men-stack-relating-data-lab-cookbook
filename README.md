@@ -10,13 +10,11 @@ tktk Write a short but descriptive summary of the content in this module. Introd
 
 ## Time to complete
 
-Estimated time to complete core lab exercise: **tktk min**
+Estimated time to complete core lab exercise: **4 hrs**
 
 ## Starter code
 
-tktk If there is not a starter code repo that students will fork and clone to start this lab, then this section and all of its content should be removed.
-
-🟢 [Starter code](#tktk-repository-for-starter-code)
+🟢 [Starter code](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template)
 
 ## Content
 
@@ -30,14 +28,6 @@ tktk If there is not a starter code repo that students will fork and clone to st
 ## Solution code
 
 🏁 [tktk Solution code](#tktk-external-repo-link-url)
-
-## Deployed sites
-
-tktk If there is not a deployed site related to this module this section and all of its content should be removed.
-
-🌐 [Live site](#tktk-deployed-app-url)
-
-🐙 [Repository](#tktk-repository-for-deployed-app)
 
 ## Internal resources
 
