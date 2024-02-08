@@ -8,33 +8,60 @@ Open your Terminal application and navigate to your `~/code/ga/labs` directory:
 cd ~/code/ga/labs
 ```
 
-<!-- tktk if starter code exists -->
+## Cloning the Auth boilerplate
 
-Fork the [[tktk Repo Name]](https://git.generalassemb.ly/modular-curriculum-all-courses/[tktk Repo Name]) repository.
+This lab uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
 
-<!-- tktk if starting from scratch  -->
-
-Make a new repository on [GitHub](https://github.com/) named [tktk Repo Name].
-
-<!-- tktk -->
-
-Clone a copy of your remote repo locally by using the `git clone` command:
+Navigate to [MEN Stack Auth template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
 
 ```bash
-git clone https://github.com/<your-username>/[tktk Repo Name].git [tktk Personal GitHub for new labs]
-git clone https://git.generalassemb.ly/<your-username>/[tktk Repo Name].git [tktk GA enterprise GitHub for starter code]
+git clone git@git.generalassemb.ly:modular-curriculum-all-courses/men-stack-session-auth-template.git
 ```
 
-> 📚 Note: In the link above, where it says `<your-username>`, you should see the username from your GitHub account.
-
-Next, `cd` into your new cloned directory, `[tktk Repo Name]`:
+Once cloned, rename this application to today's lab `men-stack-relating-data-lab-cookbook`:
 
 ```bash
-cd [tktk Repo Name]
+mv men-stack-session-auth-template men-stack-relating-data-lab-cookbook
 ```
+
+Next, `cd` into your renamed directory:
+
+```bash
+cd men-stack-relating-data-lab-cookbook
+```
+
+Finally, remove the existing `.git` information from this template:
+
+```bash
+rm -rf .git
+```
+
+> Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
+
+
+### GitHub setup
+
+To add this project to GitHub, initialize a Git repository:
+
+```bash
+git init
+```
+
+Make a new repository on [GitHub](https://github.com/) named `men-stack-relating-data-lab-cookbook`. 
+
+Link your local project to your remote GitHub repo:
+
+```bash
+git remote add origin https://git.generalassemb.ly/<github-username>/men-stack-relating-data-lab-cookbook.git
+git push origin main
+```
+
+> 🚨 Do not copy the above command. It will not work. Your GitHub username will replace `<github-username>` (including the `<` and `>`) in the URL above.
 
 Open the project's folder in your code editor:
 
 ```bash
 code .
 ```
+
+Happy Coding! 
