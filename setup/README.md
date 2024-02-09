@@ -45,6 +45,8 @@ To add this project to GitHub, initialize a Git repository:
 
 ```bash
 git init
+git add .
+git commit -m "init commit"
 ```
 
 Make a new repository on [GitHub](https://github.com/) named `men-stack-relating-data-lab-cookbook`. 
