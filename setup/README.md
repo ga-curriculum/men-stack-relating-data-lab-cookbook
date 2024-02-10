@@ -66,4 +66,7 @@ Open the project's folder in your code editor:
 code .
 ```
 
+tktk add connection string to .env
+
+
 Happy Coding! 
