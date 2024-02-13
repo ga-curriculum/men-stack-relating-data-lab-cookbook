@@ -2,11 +2,12 @@
 
 ## About
 
-tktk Write a short but descriptive summary of the content in this module. Introduce the lab. What will the students build in this lab?
+In this lab you'll create the CookBook app, a dynamic pantry manager tailored for cooking enthusiasts! This app is all about organization and inspiration. You'll be practicing relating data to a user model, crafting a smooth navigation experience, and fostering a community of other aspiring chefs. Users will have the power to perform full CRUD operations and manage their pantry items with ease. They'll also have the opportunity to explore other users' pantries, drawing inspiration and sharing their love for cooking.
 
 ## Prerequisites
 
-- tktk
+- Mongoose Relationships
+- MEN Stack Embedding Related Data
 
 ## Time to complete
 
@@ -19,15 +20,16 @@ Estimated time to complete core lab exercise: **4 hrs**
 ## Content
 
 - [Setup](./setup/README.md)
-- [Exercise](./exercise/README.md)
+
+- [Exercise: MEN Stack Embedding Related Data](./exercise/README.md)
 
 ## Level Up
 
-🚀 [Level Up](./level-up/README.md) tktk - remove section if no level ups exist.
+🚀 [Level Up: MEN Stack Referencing Related Data](./level-up/README.md)
 
 ## Solution code
 
-🏁 [tktk Solution code](#tktk-external-repo-link-url)
+🏁 [Solution code](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-relating-data-lab-cookbook-solution)
 
 ## Internal resources
 

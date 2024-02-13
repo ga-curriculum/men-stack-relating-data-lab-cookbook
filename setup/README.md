@@ -39,9 +39,9 @@ rm -rf .git
 > Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
 
 
-### GitHub setup
+## GitHub setup
 
-To add this project to GitHub, initialize a Git repository:
+To add this project to GitHub, initialize a new Git repository:
 
 ```bash
 git init
@@ -66,7 +66,25 @@ Open the project's folder in your code editor:
 code .
 ```
 
-tktk add connection string to .env
+## Create your .env
+
+Add a `.env` file to your application and add the following secret keys to your application. 
+
+```text
+MONGODB_URI=
+SESSION_SECRET=
+```
+
+## Create your .gitignore
+
+Add a `.gitignore` file with the following;
+
+```text
+node_modules
+.env
+```
+
+Run your application and test the authentication before you begin your lab. 
 
 
 Happy Coding! 
