@@ -229,7 +229,7 @@ router.get('/', (req, res) => {
 
 Implement the following user story:
 
-- AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my pantry, or sign out, depending on my current status.
+> AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my pantry, or sign out, depending on my current status.
 
 Currently the links for "Sign up" or "Sign in" are hardcoded onto the homepage. You will need to refactor and move these links into a nav bar partial for a better user experience.
 
@@ -275,7 +275,7 @@ With the nav partial included, you can now replace the hardcoded links on your h
 
 Implement the following user story:
 
-- AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
+> AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
 
 
 ### Conceptualize the `new` route
@@ -302,7 +302,7 @@ This route will render a page that displays a form to add a new item to the user
 
 Implement the following user story:
 
-- AAU, after filling out the pantry item form, I want to submit it and receive confirmation that the item has been saved in my pantry.
+> AAU, after filling out the pantry item form, I want to submit it and receive confirmation that the item has been saved in my pantry.
 
 ### Conceptualize the `create` route
 
@@ -325,7 +325,7 @@ This route will create new `foods` in the embedded pantry array on the `user` mo
 
 Implement the following user story:
 
-- AAU, I need a dedicated page to view all items in my pantry, to easily manage and review what I have stored.
+> AAU, I need a dedicated page to view all items in my pantry, to easily manage and review what I have stored.
 
 ### Build the `index` functionality
 
@@ -343,7 +343,7 @@ Refactor the `index` route to send all items in a user's pantry to the `index` v
 
 Implement the following user story:
 
-- AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
+> AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
 
 ### Conceptualize the `delete` route
 
@@ -426,7 +426,7 @@ There are two final `user` views to reach your final application. Building a com
 
 Implement the following user story:
 
-- AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
+> AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
 
 To meet this requirement you will need a new `users` controller and `views` directory for `users`. 
 
@@ -441,7 +441,7 @@ To meet this requirement you will need a new `users` controller and `views` dire
 
 Implement the following user story:
 
-- AAU, I want the option to click on another user's profile and view all the items in their pantry, to exchange ideas or find inspiration for my own pantry.
+> AAU, I want the option to click on another user's profile and view all the items in their pantry, to exchange ideas or find inspiration for my own pantry.
 
 From the community page, users should be able to click on the names of other users and see their pantry. This requires one final route and view. 
 
