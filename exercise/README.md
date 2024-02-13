@@ -135,7 +135,7 @@ Create a file named `is-signed-in.js`.
 - If a user session does not exist, the user should be redirected to the sign in page.
 
 ```js
-// is-signed-in.js
+// middleware/is-signed-in.js
 
 const isSignedIn = (req, res, next) => {
   if (req.session.user) return next();
