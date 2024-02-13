@@ -1,4 +1,4 @@
-# ![MEN Stack Relating Data Lab - Cookbook](./assets/tktk-hero.png)
+# ![MEN Stack Relating Data Lab - Cookbook](../assets/tktk-hero.png)
 
 ## About
 
@@ -14,10 +14,10 @@ Estimated time to complete core lab exercise: **4 hrs**
 
 ## Content
 
-- [Setup](./setup/README.md)
+- [Setup](../setup/README.md)
 
-- [Exercise: MEN Stack Embedding Related Data](./exercise/README.md)
+- [Exercise: MEN Stack Embedding Related Data](../exercise/README.md)
 
 ## Level Up
 
-🚀 [Level Up: MEN Stack Referencing Related Data](./level-up/README.md)
+🚀 [Level Up: MEN Stack Referencing Related Data](../level-up/README.md)
