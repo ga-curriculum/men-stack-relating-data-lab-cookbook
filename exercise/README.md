@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pantry: // Insert foodSchema here
+  pantry: // embed foodSchema here
 });
 ```
 
