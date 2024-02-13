@@ -170,7 +170,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page. 
 
-For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, is signed in should come above the `foods` controller, but not before `auth`.
+For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, `isSignedIn` should come above the `foods` controller, but not before `auth`.
 
 ```js
 app.use(passUserToView)
