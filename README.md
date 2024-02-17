@@ -7,11 +7,15 @@ In this lab you'll create the Cookbook app, a dynamic pantry manager tailored fo
 ## Prerequisites
 
 - Mongoose Relationships
+
+### One Related Data Module
+
 - MEN Stack Embedding Related Data
+- MEN Stack Referencing Related Data
 
 ## Time to complete
 
-Estimated time to complete core lab exercise: **4 hrs**
+Estimated time to complete each core lab exercise: **4 hrs**
 
 ## Starter code
 
@@ -21,11 +25,9 @@ Estimated time to complete core lab exercise: **4 hrs**
 
 - [Setup](./setup/README.md)
 
-- [Exercise: MEN Stack Embedding Related Data](./exercise/README.md)
+- [Exercise: MEN Stack Embedding Related Data](./exercise-embedding-related-data/README.md)
 
-## Level Up
-
-🚀 [Level Up: MEN Stack Referencing Related Data](./level-up/README.md)
+- [Exercise: MEN Stack Referencing Related Data](./exercise-referencing-related-data/README.md)
 
 ## Solution code
 
