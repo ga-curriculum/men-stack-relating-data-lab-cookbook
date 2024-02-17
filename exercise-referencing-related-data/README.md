@@ -83,7 +83,7 @@ Use the following charts as guides when building your RESTful routes.
 | Index  | `/recipes/:recipeId/ingredients`                     | GET       |
 | New    | `/recipes/:recipeId/ingredients/new`                 | GET       |
 | Create | `/recipes/:recipeId/ingredients`                     | POST      |
-| Edit   | `/recipes/:recipeId/ingredients/:ingredientId/edit` | GET       |
+| Edit   | `/recipes/:recipeId/ingredients/:ingredientId/edit`  | GET       |
 | Update | `/recipes/:recipeId/ingredients/:ingredientId`       | PUT       |
 | Delete | `/recipes/:recipeId/ingredients/:ingredientId`       | DELETE    |
 
@@ -205,6 +205,10 @@ For your landing page, you will use:
 
    - `GET` `/users/:userId/recipes`
 
+Implement the following user story:
+
+> AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
+
 ### Define the `index` route for Recipes
 
 - In your `recipes` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/:userId/recipes`.
@@ -242,7 +246,7 @@ router.get('/', async (req, res) => {
 
 Implement the following user story:
 
-> As a User (AAU), I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
+> AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
 
 Currently, the links for "Sign up" or "Sign in" are hardcoded onto the homepage. You will need to refactor and move these links into a nav bar partial for a better user experience.
 
@@ -288,7 +292,7 @@ With the nav partial included, you can now replace the hardcoded links on your h
 
 Implement the following user story:
 
-> As a User (AAU), I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes.
+> AAU, I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes.
 
 ### Conceptualize the `new` recipe route
 
@@ -336,7 +340,7 @@ This route will create new `recipes` in the user's collection.
 
 Implement the following user story:
 
-> As a User (AAU), I need a dedicated page to view all my recipes, to easily manage and review what I have created.
+> AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
 
 ### Build the `index` functionality
 
@@ -430,3 +434,51 @@ This route will update a specific recipe:
 - If any errors, log them and redirect back home `/`.
 
 Now that you have full crud functionality for recipes, test each route end to end and check for errors before moving on.
+
+<br><hr><br>
+
+## Connect `ingredients` to `recipes`
+
+
+tktk add new ingredients and ties them to recipes
+
+
+
+### Congrats! You have reached MVP! 🎉
+
+<br><hr><br>
+
+## Level Up 
+
+## Add a Community page
+
+There are two final `user` views to reach your final application. Building a community page for users to find each other and gain inspiration from the recipes of others.
+
+Implement the following user story:
+
+> AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
+
+To meet this requirement you will need a new `users` controller and `views` directory for `users`. 
+
+- Create a simple `/users` controller with an `index` route to get all users.
+- Connect your new controller in `server.js`
+- Create a new directory inside of `views` called `users`.
+- Add a new view called `index.ejs`
+- Render a list of all users on the `index` page.
+- Add a link to your nav partial that says "Explore Our Community". Link it to your new community page.
+
+## View other users' `recipes`
+
+Implement the following user story:
+
+> AAU, I want the option to click on another user's profile and view all their recipes, to exchange ideas or find inspiration for my own recipes.
+
+From the community page, users should be able to click on the names of other users and see their recipes. This requires one final route and view. 
+
+- Create a `show` route in your `/users` controller
+- Create a `show.ejs` in the `users` views directory
+- Add a link for each user's `show` page in the rendered community list.
+- On each user's `show` page, render a list of that user's recipes.
+- This list should be read-only.
+
+Test your new community page. 
