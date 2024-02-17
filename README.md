@@ -1,4 +1,4 @@
-# ![MEN Stack Relating Data Lab - Cookbook](./assets/tktk-hero.png)
+# ![MEN Stack Relating Data Lab - Cookbook](./assets/hero.png)
 
 ## About
 

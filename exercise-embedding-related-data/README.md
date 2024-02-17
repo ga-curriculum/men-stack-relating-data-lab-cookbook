@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pantry: // Insert foodSchema here
+  pantry: // embed foodSchema here
 });
 ```
 
@@ -135,7 +135,7 @@ Create a file named `is-signed-in.js`.
 - If a user session does not exist, the user should be redirected to the sign in page.
 
 ```js
-// is-signed-in.js
+// middleware/is-signed-in.js
 
 const isSignedIn = (req, res, next) => {
   if (req.session.user) return next();
@@ -170,7 +170,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page. 
 
-For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, is signed in should come above the `foods` controller, but not before `auth`.
+For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, `isSignedIn` should come above the `foods` controller, but not before `auth`.
 
 ```js
 app.use(passUserToView)
