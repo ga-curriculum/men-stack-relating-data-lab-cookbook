@@ -282,7 +282,7 @@ Implement the following user story:
 
 For your `new` page, you will use:
 
-   - `GET` `/users/:userId/applications/new`
+   - `GET` `/users/:userId/foods/new`
 
 ### Define the `new` route
 
@@ -318,7 +318,7 @@ This route will create new `foods` in the embedded pantry array on the `user` mo
 - Look up the user from `req.session`
 - Push `req.body` (the new form data object) to the `pantry` array of the current user.
 - Save changes to the `user`.
-- Redirect back to the applications `index` view.
+- Redirect back to the application's `index` view.
 - If any errors, log them and redirect back home `/`.
 
 ## Add pantry items to `index` page

@@ -194,3 +194,239 @@ app.use('/recipes/:recipeId/ingredients', ingredientsController);
 ```
 
 You are now ready to begin building your protected routes.
+
+## Build the `recipe` routes and views
+
+With the main structure of the application complete, it's time to start building out the `recipe` pages guided by user stories.
+
+### Conceptualize the `index` route for Recipes
+
+For your landing page, you will use:
+
+   - `GET` `/users/:userId/recipes`
+
+### Define the `index` route for Recipes
+
+- In your `recipes` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/:userId/recipes`.
+- This route should `res.render()` an `index.ejs` view, showing all recipes associated with a specific user.
+
+```js
+router.get('/', async (req, res) => {
+  res.render('recipes/index.ejs');
+});
+```
+
+### Render the `index` template for Recipes
+
+- Create a new directory called `recipes` inside of the `views` directory. This will hold the templates for your `recipes` pages. 
+
+- Create an `index.ejs` file in `recipes`. Add a basic HTML boilerplate to this file and include a list to display all recipes.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recipes</title>
+  </head>
+  <body>
+    <h1>Welcome to My Recipes</h1>
+  </body>
+</html>
+```
+
+- Test your new route in the browser to confirm that everything renders correctly. 
+
+## Build the `nav` partial
+
+Implement the following user story:
+
+> As a User (AAU), I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
+
+Currently, the links for "Sign up" or "Sign in" are hardcoded onto the homepage. You will need to refactor and move these links into a nav bar partial for a better user experience.
+
+- Create a directory called `partials` inside the `views` directory.
+- Inside partials, create a new file called `_navbar.ejs`
+
+Create a nav inside `_navbar.ejs`:
+
+- This nav should have a `home` link displayed on every page.
+- Other links should be rendered conditionally based on whether or not a `user` is signed in.
+- If a `user` is signed in, they should see links to "View my Recipes" or "Sign Out".
+- If a `user` is not signed in, they should see links to "Sign In" or "Sign Up".
+
+```html
+<nav>
+  <a href="/">Home</a>
+  <% if(user) { %>
+    <a href="/users/<%=user._id%>/recipes">View my Recipes</a>
+    <a href="/auth/sign-out">Sign Out</a>
+  <% } else { %>
+    <a href="/auth/sign-in">Sign In</a>
+    <a href="/auth/sign-up">Sign Up</a>
+  <% } %>
+</nav>
+```
+
+For the best user experience, you'll want to include this nav partial at the top of all of your existing templates.
+
+```html
+<%- include('./partials/_navbar.ejs') %>
+```
+
+With the nav partial included, you can now replace the hardcoded links on your homepage with a partial and some simple welcome text. 
+
+```html
+<body>
+  <%- include('./partials/_navbar.ejs') %>
+  <h1>Welcome to CookBook</h1>
+</body>
+```
+
+## Build the `new` recipe page
+
+Implement the following user story:
+
+> As a User (AAU), I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes.
+
+### Conceptualize the `new` recipe route
+
+For your `new` recipe page, you will use:
+
+   - `GET` `/users/:userId/recipes/new`
+
+### Define the `new` recipe route
+
+This route will render a page that displays a form to add a new recipe. 
+
+- In `controllers/recipes.js`, create a `new` route.
+- This route should `res.render()` a `new.ejs` view.
+- Add an "Add New Recipe" link to the `index` page and point it to your new route.
+
+### Render the `new` recipe template
+
+- Create a new template called `new.ejs` in the `views/recipes` directory.
+- This view should display a form to add a new recipe. Design your form based on the `recipeSchema` defined earlier.
+- The form action will `POST` to the `create` route.
+
+## Build the `create` recipe functionality
+
+Implement the following user story:
+
+> AAU, after filling out the recipe form, I want to submit it and receive confirmation that the recipe has been saved.
+
+### Conceptualize the `create` recipe route
+
+This route will:
+
+- `POST` to `/users/:userId/recipes`
+
+### Define the `create` recipe route
+
+This route will create new `recipes` in the user's collection. 
+
+- Look up the user from `req.session`
+- Create a new `Recipe` object using `req.body` and assign the user's `_id` as the owner.
+- Save the new `Recipe`.
+- Redirect back to the recipe `index` view.
+- If any errors, log them and redirect back home `/`.
+
+## Add recipes to `index` page
+
+Implement the following user story:
+
+> As a User (AAU), I need a dedicated page to view all my recipes, to easily manage and review what I have created.
+
+### Build the `index` functionality
+
+Refactor the `index` route to send all recipes created by a user to the `index` view:
+
+- Look up the current user's recipes
+- Send all recipes to the view via `res.locals`
+- If any errors, log them and redirect back home `/`.
+
+### Update the `index` template
+
+- Use conditional rendering to display a list of recipes or a message that reads "You have not created any recipes yet."
+
+## Build the `edit` and `delete` functionality for recipes
+
+Implement the following user story:
+
+> AAU, I need the ability to edit and delete recipes, allowing me full control over managing my creations.
+
+### Conceptualize the `delete` recipe route
+
+This route will:
+
+- `DELETE` to `/users/:userId/recipes/:recipeId`
+- Add `?_method=DELETE` to utilize the method override middleware
+
+### Define the `delete` recipe route
+
+- Define the `delete` route in the `recipes` controller
+
+### Add `delete` link to the `index` template
+
+- Add a simple form element to each recipe that posts to the `delete` route
+- The form should appear as a single `delete` button in the UI
+
+### Build the `delete` recipe functionality
+
+This route will delete the recipe from the user's collection.
+
+- Look up the user from `req.session`
+- Use the `.deleteOne()` method to delete a recipe using the id supplied from `req.params`
+- Save changes to the `user`
+- If any errors, log them and redirect back home `/`.
+
+## Build the `edit` recipe page
+
+### Conceptualize the `edit` recipe route
+
+For your `edit` recipe page, you will use:
+
+- `GET` `/users/:userId/recipes/:recipeId/edit`
+
+### Define the `edit` recipe route
+
+This route will render a page that displays a form to edit a specific recipe.
+
+- In `controllers/recipes.js`, create an `edit` route.
+- This route should `res.render()` an `edit.ejs` view.
+- Find the current recipe from the id supplied by `req.params` and provide it to the edit form.
+- Add an edit link to each recipe item rendered on the index page.
+
+### Render the `edit` recipe template
+
+- Create a new template called `edit.ejs` in the `views/recipes` directory.
+- This view should display a form to edit a specific recipe. Design your form based on the `recipeSchema`.
+- Auto-fill the form with the `recipe` data supplied from the route.
+- The form action will `POST` to the `update` route.
+
+## Build the `update` recipe functionality 
+
+### Conceptualize the `update` recipe route
+
+This route will:
+
+- `POST` to `/users/:userId/recipes/:recipeId`
+- Add `?_method=PUT` to utilize the method override middleware
+
+### Define the `update` recipe route
+
+- Define the update route in the `recipes` controller
+
+### Build the `update` recipe functionality
+
+This route will update a specific recipe:
+
+- Find the user from `req.session`
+- Find the current recipe from the id supplied by `req.params`
+- Use the `.set()` method, updating the current recipe to reflect the new form data on `req.body`
+- Save the current `user`
+- Redirect back to the `index` view
+- If any errors, log them and redirect back home `/`.
+
+Now that you have full crud functionality for recipes, test each route end to end and check for errors before moving on.
