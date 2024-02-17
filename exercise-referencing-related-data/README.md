@@ -195,6 +195,52 @@ app.use('/recipes/:recipeId/ingredients', ingredientsController);
 
 You are now ready to begin building your protected routes.
 
+## Build the `nav` partial
+
+Implement the following user story:
+
+> AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
+
+Currently, the links for "Sign up" or "Sign in" are hardcoded onto the homepage. You will need to refactor and move these links into a nav bar partial for a better user experience.
+
+- Create a directory called `partials` inside the `views` directory.
+- Inside partials, create a new file called `_navbar.ejs`
+
+Create a nav inside `_navbar.ejs`:
+
+- This nav should have a `home` link displayed on every page.
+- Other links should be rendered conditionally based on whether or not a `user` is signed in.
+- If a `user` is signed in, they should see links to "View my Recipes" or "Sign Out".
+- If a `user` is not signed in, they should see links to "Sign In" or "Sign Up".
+
+```html
+<nav>
+  <a href="/">Home</a>
+  <% if(user) { %>
+    <a href="/users/<%=user._id%>/recipes">View my Recipes</a>
+    <a href="/auth/sign-out">Sign Out</a>
+  <% } else { %>
+    <a href="/auth/sign-in">Sign In</a>
+    <a href="/auth/sign-up">Sign Up</a>
+  <% } %>
+</nav>
+```
+
+For the best user experience, you'll want to include this nav partial at the top of all of your existing templates.
+
+```html
+<%- include('./partials/_navbar.ejs') %>
+```
+
+With the nav partial included, you can now replace the hardcoded links on your homepage with a partial and some simple welcome text. 
+
+```html
+<body>
+  <%- include('./partials/_navbar.ejs') %>
+  <h1>Welcome to CookBook</h1>
+</body>
+```
+
 ## Build the `recipe` routes and views
 
 With the main structure of the application complete, it's time to start building out the `recipe` pages guided by user stories.
@@ -242,51 +288,6 @@ router.get('/', async (req, res) => {
 
 - Test your new route in the browser to confirm that everything renders correctly. 
 
-## Build the `nav` partial
-
-Implement the following user story:
-
-> AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
-
-Currently, the links for "Sign up" or "Sign in" are hardcoded onto the homepage. You will need to refactor and move these links into a nav bar partial for a better user experience.
-
-- Create a directory called `partials` inside the `views` directory.
-- Inside partials, create a new file called `_navbar.ejs`
-
-Create a nav inside `_navbar.ejs`:
-
-- This nav should have a `home` link displayed on every page.
-- Other links should be rendered conditionally based on whether or not a `user` is signed in.
-- If a `user` is signed in, they should see links to "View my Recipes" or "Sign Out".
-- If a `user` is not signed in, they should see links to "Sign In" or "Sign Up".
-
-```html
-<nav>
-  <a href="/">Home</a>
-  <% if(user) { %>
-    <a href="/users/<%=user._id%>/recipes">View my Recipes</a>
-    <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-    <a href="/auth/sign-in">Sign In</a>
-    <a href="/auth/sign-up">Sign Up</a>
-  <% } %>
-</nav>
-```
-
-For the best user experience, you'll want to include this nav partial at the top of all of your existing templates.
-
-```html
-<%- include('./partials/_navbar.ejs') %>
-```
-
-With the nav partial included, you can now replace the hardcoded links on your homepage with a partial and some simple welcome text. 
-
-```html
-<body>
-  <%- include('./partials/_navbar.ejs') %>
-  <h1>Welcome to CookBook</h1>
-</body>
-```
 
 ## Build the `new` recipe page
 

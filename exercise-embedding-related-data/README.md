@@ -181,50 +181,6 @@ app.use('/users/:userId/foods',foodsController);
 
 You are now ready to begin building your protected routes. 
 
-## Build the `index` route
-
-With the main structure of the application complete, it's time to start building out the site pages guided by user stories.
-
-### Conceptualize the `index` route
-
-For your landing page, you will use:
-
-   - `GET` `/users/:userId/foods`
-
-### Define the `index` route
-
-- In your `foods` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/foods`.
-- This route should `res.render()` a `index.ejs` view.
-
-```js
-router.get('/', (req, res) => {
-  res.render('foods/index.ejs')
-});
-```
-
-### Render the `index` template
-
-- Create a new directory called `foods` inside of the `views` directory. This will hold the templates for your `foods` pages. 
-
-- Create an `index.ejs` file in `foods`. Add a basic HTML boilerplate to this file.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Pantry</title>
-  </head>
-  <body>
-    <h1>Welcome to my Pantry</h1>
-  </body>
-</html>
-```
-
-- Test your new route in the browser to confirm that everything renders correctly.
-
-
 ## Build the `nav` partial
 
 Implement the following user story:
@@ -270,6 +226,50 @@ With the nav partial included, you can now replace the hardcoded links on your h
   <h1>Welcome to CookBook</h1>
 </body>
 ```
+
+## Build the `index` route
+
+With the main structure of the application complete, it's time to start building out the site pages guided by user stories.
+
+### Conceptualize the `index` route
+
+For your landing page, you will use:
+
+   - `GET` `/users/:userId/foods`
+
+### Define the `index` route
+
+- In your `foods` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/foods`.
+- This route should `res.render()` a `index.ejs` view.
+
+```js
+router.get('/', (req, res) => {
+  res.render('foods/index.ejs')
+});
+```
+
+### Render the `index` template
+
+- Create a new directory called `foods` inside of the `views` directory. This will hold the templates for your `foods` pages. 
+
+- Create an `index.ejs` file in `foods`. Add a basic HTML boilerplate to this file.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pantry</title>
+  </head>
+  <body>
+    <h1>Welcome to my Pantry</h1>
+  </body>
+</html>
+```
+
+- Test your new route in the browser to confirm that everything renders correctly.
+
 
 ## Build the `new` page
 

@@ -7,9 +7,10 @@ In this lab you'll create the Cookbook app, a dynamic pantry manager tailored fo
 ## Prerequisites
 
 - Mongoose Relationships
-and
+
+### One Related Data Module
+
 - MEN Stack Embedding Related Data
-or
 - MEN Stack Referencing Related Data
 
 ## Time to complete
