@@ -8,7 +8,7 @@ In this lab you'll create the Cookbook app, a dynamic pantry manager tailored fo
 
 - Mongoose Relationships
 
-### One Related Data Module
+### One Relating Data Module
 
 - MEN Stack Embedding Related Data
 - MEN Stack Referencing Related Data
