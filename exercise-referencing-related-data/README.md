@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab you'll create the Cookbook app, a dynamic Cookbook tailored for cooking enthusiasts! In this lab, you'll be developing a web application that's all about managing recipes and their ingredients efficiently and creatively. You'll practice using referenced data schemas in MongoDB with `Recipe` and `Ingredient` models and cultivate a community of cooking enthusiasts. Users will have the capability to perform full CRUD operations on both recipes and ingredients, manage their recipe collections, and explore other users' recipes for inspiration.
+In this lab you'll create the Cookbook app, a dynamic recipe organization tool tailored for cooking enthusiasts! For this exercise, you'll be developing a web application that's all about managing recipes and their ingredients. You'll practice referencing related data schemas in MongoDB with two models - `Recipe` and `Ingredient`. Users will have the ability to perform full CRUD operations on both models, manage their recipe collections, and explore other users' recipes for inspiration.
 
-**MVP: Your primary task is to implement full CRUD operations for Recipe and Ingredient models, using referencing to associate these entities.**
+**MVP: Your primary task is to implement full CRUD operations for the Recipe and Ingredient models, using referencing to associate these entities.**
 
 ## User stories and application planning
 
@@ -15,10 +15,10 @@ Use the following user stories to guide the functionality and features of your a
 - AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
 - AAU, I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes to my collection.
 - AAU, after filling out the recipe form, I want to submit it and receive confirmation that the recipe has been saved.
-- AAU, I need the ability to edit and delete recipes in my collection, allowing me full control over managing my culinary creations.
+- AAU, I need the ability to edit and delete recipes in my collection, allowing me full control over managing my data.
 - AAU, I want to be able to add new ingredients to my recipe manager. This way, I can keep track of the different ingredients I use across various recipes.
 - AAU, when adding a new recipe, I want an option to quickly add ingredients that are not already in my list. This will streamline the process of recipe creation, ensuring I can include all necessary ingredients without navigating away from the recipe form.
-- AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
+- AAU, I am interested in viewing a list of all other app users, to foster a sense of community within the app.
 - AAU, I want the option to click on another user's profile and view all the recipes they have created, to exchange ideas or find inspiration for my own collection.
 
 ## Data modeling and ERD
@@ -46,7 +46,7 @@ Create a new file in `models` called `ingredient.js`. Create a mongoose schema w
 
 ### Referencing Data
 
-In this lab, he `Recipe` model will reference the `Ingredient` model using an array of ObjectIds. Each recipe will be associated with a `User`, thereby creating a relationship between users and their collections of recipes and ingredients.
+In this lab, the `Recipe` model will reference the `Ingredient` model using an array of ObjectIds. Each recipe will be associated with a `User`, thereby creating a relationship between users and their collections of recipes and ingredients.
 
 - You will be referencing the `Recipe` schema within the `User` schema, establishing a one-to-many relationship
 
@@ -56,12 +56,11 @@ An ERD (Entity-Relationship Diagram) will help you visualize the relationships b
 
 ![Cookbook App ERD](../assets/erd.png)
 
-In this diagram, you can see how each `Recipe` is connected to a `User` and how `Ingredients` are associated with `Recipes`. This structure forms the backbone of your Cookbook application, allowing users to manage their recipes and ingredients efficiently.
+In this diagram, you can see how each `Recipe` is connected to a `User` and how `Ingredients` are associated with `Recipes`. This structure forms the backbone of your Cookbook application.
 
 ## Define RESTful routes for managing data
 
 Use the following charts as guides when building your RESTful routes.
-
 
 ### Recipe routes
 
@@ -75,7 +74,6 @@ Use the following charts as guides when building your RESTful routes.
 | Update | `/users/:userId/recipes/:recipeId`      | PUT       |
 | Delete | `/users/:userId/recipes/:recipeId`      | DELETE    |
 
-
 ### Ingredient routes
 
 | Action | Route                                                | HTTP Verb |
@@ -83,13 +81,16 @@ Use the following charts as guides when building your RESTful routes.
 | Index  | `/recipes/:recipeId/ingredients`                     | GET       |
 | New    | `/recipes/:recipeId/ingredients/new`                 | GET       |
 | Create | `/recipes/:recipeId/ingredients`                     | POST      |
+| Show   | `/recipes/:recipeId/ingredients/:ingredientId`       | GET       |
 | Edit   | `/recipes/:recipeId/ingredients/:ingredientId/edit`  | GET       |
 | Update | `/recipes/:recipeId/ingredients/:ingredientId`       | PUT       |
 | Delete | `/recipes/:recipeId/ingredients/:ingredientId`       | DELETE    |
 
+> Note: you may not need ***all*** of these routes and views in your application
+
 ## Structure and Setup
 
-### Build the Controllers
+### 1. Build the Controllers
 
 - Create files for the `recipes` and `ingredients` controllers in the controllers directory.
 - Require all essential modules at the top of each controller file.
@@ -111,11 +112,10 @@ module.exports = router;
 
 Repeat this process for the `ingredients` controller. 
 
-### Use the controllers in server
+### 2. Use the controllers in server
 
 - Import the `recipes` and `ingredients` controllers in `server.js`.
 - Use middleware to direct incoming requests to the respective controllers.
-
 
 ```js
 // server.js
@@ -128,12 +128,13 @@ const ingredientsController = require('./controllers/ingredients.js');
 ```js
 // server.js
 
+// below middleware
 app.use('/auth', authController);
 app.use('/users/:userId/recipes', recipesController);
 app.use('/recipes/:recipeId/ingredients', ingredientsController);
 ```
 
-## Add middleware
+### 3. Add middleware
 
 Now you'll need to add two middleware functions to your application:
 
@@ -213,18 +214,6 @@ Create a nav inside `_navbar.ejs`:
 - If a `user` is signed in, they should see links to "View my Recipes" or "Sign Out".
 - If a `user` is not signed in, they should see links to "Sign In" or "Sign Up".
 
-```html
-<nav>
-  <a href="/">Home</a>
-  <% if(user) { %>
-    <a href="/users/<%=user._id%>/recipes">View my Recipes</a>
-    <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-    <a href="/auth/sign-in">Sign In</a>
-    <a href="/auth/sign-up">Sign Up</a>
-  <% } %>
-</nav>
-```
 
 For the best user experience, you'll want to include this nav partial at the top of all of your existing templates.
 
@@ -232,7 +221,7 @@ For the best user experience, you'll want to include this nav partial at the top
 <%- include('./partials/_navbar.ejs') %>
 ```
 
-With the nav partial included, you can now replace the hardcoded links on your homepage with a partial and some simple welcome text. 
+With the nav partial included, you can replace the hardcoded links in the homepage starter code with a partial and some simple welcome text.
 
 ```html
 <body>
@@ -245,7 +234,7 @@ With the nav partial included, you can now replace the hardcoded links on your h
 
 With the main structure of the application complete, it's time to start building out the `recipe` pages guided by user stories.
 
-### Conceptualize the `index` route for Recipes
+### 1. Conceptualize the `index` route for Recipes
 
 For your landing page, you will use:
 
@@ -255,7 +244,7 @@ Implement the following user story:
 
 > AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
 
-### Define the `index` route for Recipes
+### 2. Define the `index` route for Recipes
 
 - In your `recipes` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/:userId/recipes`.
 - This route should `res.render()` an `index.ejs` view, showing all recipes associated with a specific user.
@@ -266,7 +255,7 @@ router.get('/', async (req, res) => {
 });
 ```
 
-### Render the `index` template for Recipes
+### 3. Render the `index` template for Recipes
 
 - Create a new directory called `recipes` inside of the `views` directory. This will hold the templates for your `recipes` pages. 
 
@@ -295,13 +284,13 @@ Implement the following user story:
 
 > AAU, I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes.
 
-### Conceptualize the `new` recipe route
+### 1. Conceptualize the `new` recipe route
 
 For your `new` recipe page, you will use:
 
    - `GET` `/users/:userId/recipes/new`
 
-### Define the `new` recipe route
+### 2. Define the `new` recipe route
 
 This route will render a page that displays a form to add a new recipe. 
 
@@ -309,7 +298,7 @@ This route will render a page that displays a form to add a new recipe.
 - This route should `res.render()` a `new.ejs` view.
 - Add an "Add New Recipe" link to the `index` page and point it to your new route.
 
-### Render the `new` recipe template
+### 3. Render the `new` recipe template
 
 - Create a new template called `new.ejs` in the `views/recipes` directory.
 - This view should display a form to add a new recipe. Design your form based on the `recipeSchema` defined earlier.
@@ -321,13 +310,13 @@ Implement the following user story:
 
 > AAU, after filling out the recipe form, I want to submit it and receive confirmation that the recipe has been saved.
 
-### Conceptualize the `create` recipe route
+### 1. Conceptualize the `create` recipe route
 
 This route will:
 
 - `POST` to `/users/:userId/recipes`
 
-### Define the `create` recipe route
+### 2. Define the `create` recipe route
 
 This route will create new `recipes` in the user's collection. 
 
@@ -343,7 +332,7 @@ Implement the following user story:
 
 > AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
 
-### Build the `index` functionality
+### 1. Build the `index` functionality
 
 Refactor the `index` route to send all recipes created by a user to the `index` view:
 
@@ -351,33 +340,33 @@ Refactor the `index` route to send all recipes created by a user to the `index` 
 - Send all recipes to the view via `res.locals`
 - If any errors, log them and redirect back home `/`.
 
-### Update the `index` template
+### 2. Update the `index` template
 
 - Use conditional rendering to display a list of recipes or a message that reads "You have not created any recipes yet."
 
-## Build the `edit` and `delete` functionality for recipes
+## Build `delete` route
 
 Implement the following user story:
 
 > AAU, I need the ability to edit and delete recipes, allowing me full control over managing my creations.
 
-### Conceptualize the `delete` recipe route
+### 1. Conceptualize the `delete` recipe route
 
 This route will:
 
 - `DELETE` to `/users/:userId/recipes/:recipeId`
 - Add `?_method=DELETE` to utilize the method override middleware
 
-### Define the `delete` recipe route
+### 2. Define the `delete` recipe route
 
 - Define the `delete` route in the `recipes` controller
 
-### Add `delete` link to the `index` template
+### 3. Add `delete` link to the `index` template
 
 - Add a simple form element to each recipe that posts to the `delete` route
 - The form should appear as a single `delete` button in the UI
 
-### Build the `delete` recipe functionality
+### 4. Build the `delete` recipe functionality
 
 This route will delete the recipe from the user's collection.
 
@@ -388,13 +377,17 @@ This route will delete the recipe from the user's collection.
 
 ## Build the `edit` recipe page
 
-### Conceptualize the `edit` recipe route
+Implement the following user story:
+
+> AAU, I need the ability to edit and delete recipes, allowing me full control over managing my creations.
+
+### 1. Conceptualize the `edit` recipe route
 
 For your `edit` recipe page, you will use:
 
 - `GET` `/users/:userId/recipes/:recipeId/edit`
 
-### Define the `edit` recipe route
+### 2. Define the `edit` recipe route
 
 This route will render a page that displays a form to edit a specific recipe.
 
@@ -403,7 +396,7 @@ This route will render a page that displays a form to edit a specific recipe.
 - Find the current recipe from the id supplied by `req.params` and provide it to the edit form.
 - Add an edit link to each recipe item rendered on the index page.
 
-### Render the `edit` recipe template
+### 3. Render the `edit` recipe template
 
 - Create a new template called `edit.ejs` in the `views/recipes` directory.
 - This view should display a form to edit a specific recipe. Design your form based on the `recipeSchema`.
@@ -412,18 +405,18 @@ This route will render a page that displays a form to edit a specific recipe.
 
 ## Build the `update` recipe functionality 
 
-### Conceptualize the `update` recipe route
+### 1. Conceptualize the `update` recipe route
 
 This route will:
 
 - `POST` to `/users/:userId/recipes/:recipeId`
 - Add `?_method=PUT` to utilize the method override middleware
 
-### Define the `update` recipe route
+### 2. Define the `update` recipe route
 
 - Define the update route in the `recipes` controller
 
-### Build the `update` recipe functionality
+### 3. Build the `update` recipe functionality
 
 This route will update a specific recipe:
 
@@ -436,20 +429,56 @@ This route will update a specific recipe:
 
 Now that you have full crud functionality for recipes, test each route end to end and check for errors before moving on.
 
-<br><hr><br>
+<br>
 
-## Connect `ingredients` to `recipes`
+## Connect `Ingredients` to `Recipes`
 
+In this part of the lab, you'll integrate the `Ingredient` model into the `Recipe` creation and management process. 
 
-tktk add new ingredients and ties them to recipes
+Your task is to brainstorm a way to incorporate ingredient management into your existing recipe structure. **This process is intentionally open-ended to encourage creative problem-solving.**
 
+### Ingredient routes and logic
 
+**Note:** It might not be necessary to develop full RESTful routes for `Ingredient`. Instead, consider these approaches:
+- Integrate ingredient functionalities directly within recipe pages, such as allowing users to add new ingredients while creating or editing a recipe.
+- Implement simpler routes for ingredients, focusing on essential functionalities like adding or selecting ingredients for recipes.
+
+### Handling new ingredients
+
+Decide how users will add new ingredients that aren't in the database:
+
+- Example 1: Enable direct addition of new ingredients during recipe creation or editing.
+- Example 2: Set up a pages for adding ingredients to the database, separate from recipe management.
+
+### Designing the ingredient input interface
+
+Develop a user-friendly interface for ingredient input:
+
+- Make sure the interface is simple and meshes well with the recipe creation or editing process.
+- Consider UI elements like dropdowns, checkboxes, or input fields for ingredient selection. Consider which is the best approach and why?
+
+### Develope backend logic for new ingredients
+
+Create backend logic to handle the addition and association of ingredients:
+
+- Focus on avoiding duplication
+- Consider the functionality of new ingredient creation and linking existing ingredients to recipes.
+
+### Steps for Implementation
+
+1. **Plan Your Approach:** Sketch out how you intend to integrate ingredients into your recipe management. This might include wireframes or a flowchart.
+
+2. **Update Recipe Forms:** Modify your recipe creation and editing forms to include ingredient selection or addition.
+
+3. **Implement Backend Logic:** Develop the necessary backend logic to handle ingredient data—this includes creating or linking ingredients to recipes.
+
+4. **Testing:** Thoroughly test the ingredient UI. Ensure that ingredients can be added, displayed, and associated with recipes correctly.
+
+By the end of this section you should be able to perform full crud on both recipes and their related ingredients.
 
 ### Congrats! You have reached MVP! 🎉
 
-<br><hr><br>
-
-## Level Up 
+<br>
 
 ## Add a Community page
 

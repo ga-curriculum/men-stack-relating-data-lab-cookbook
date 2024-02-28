@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab you'll create the CookBook app, a dynamic pantry manager tailored for cooking enthusiasts! This app is all about organization and inspiration. You'll be practicing using embedded data schemas within a user model, crafting a smooth navigation experience, and fostering a community of other aspiring chefs. Users will have the power to perform full CRUD operations and manage their pantry items with ease. They'll also have the opportunity to explore other users' pantries, drawing inspiration and sharing their love for cooking.
+In this lab you'll create the Cookbook app, a dynamic pantry manager for cooking enthusiasts! For this exercise, you'll be practicing embedding a new data schema within a user model. Users will have the power to perform full CRUD operations to manage their pantry items with ease. They'll also have the opportunity to explore other users' pantries, drawing inspiration and sharing their love for cooking.
 
-**MVP: Your task is to perform full crud on food items in a users `pantry` - an embedded data schema on the `user` model.**
+**MVP: Your task is to perform full crud on items in a User's `pantry` - an embedded data schema on the `user` model.**
 
 ## User stories and application planning
 
@@ -23,11 +23,8 @@ Use the following user stories to guide the functionality and features of your a
 
 Your task is to create a `Pantry`, an embedded array within the `User` model. This array represents the user's collection of food items. Because the pantry holds foods, the name of our schema will be `foodSchema`.
 
-An ERD will help visualize this relationship:
 
-![Cookbook App ERD](../assets/erd.png)
-
-### Create food schema
+### Create the `Food` schema
 
 Each user's pantry will contain an array of `foods`, each defined by a simple schema:
 
@@ -35,7 +32,7 @@ Each user's pantry will contain an array of `foods`, each defined by a simple sc
 |-----------------|----------|-----------|
 | name            | String   | true      |
 
-Begin by defining `foodSchema` in the `user` model file using the `mongoose.Schema` method. Include the necessary properties for food items.
+Begin by defining `foodSchema` in the `user` model file using the `new mongoose.Schema` method. Include the necessary properties for food items.
 
 ```js
 // user.js
@@ -63,6 +60,12 @@ const userSchema = new mongoose.Schema({
 });
 ```
 
+An ERD (Entity-Relationship Diagram) will help you visualize the relationships between these entities:
+
+![Cookbook App ERD](../assets/erd.png)
+
+> Additional sections of this lab explore relating data using referencing, for this exercise, you can ignore the schemas for recipe and ingredient. 
+
 ## Define RESTful routes for managing data
 
 Use this chart as a guide when building your RESTful routes.
@@ -81,7 +84,7 @@ Because this data is embedded in the user model, our routes need to be structure
 
 ## Structure and Setup
 
-### Build the controller
+### 1. Build the controller
 
 - Create a file called `foods.js` in the controllers directory.
 - Require all essential modules at the top of `foods.js`
@@ -100,7 +103,7 @@ const User = require('../models/user.js');
 module.exports = router;
 ```
 
-### Use the controller in server
+### 2. Use the controller in server
 
 - Import the foods controller in `server.js`.
 - Use middleware to direct incoming requests to `/users/:userId/foods` to the foods controller.
@@ -231,13 +234,13 @@ With the nav partial included, you can now replace the hardcoded links on your h
 
 With the main structure of the application complete, it's time to start building out the site pages guided by user stories.
 
-### Conceptualize the `index` route
+### 1. Conceptualize the `index` route
 
 For your landing page, you will use:
 
    - `GET` `/users/:userId/foods`
 
-### Define the `index` route
+### 2. Define the `index` route
 
 - In your `foods` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/foods`.
 - This route should `res.render()` a `index.ejs` view.
@@ -248,7 +251,7 @@ router.get('/', (req, res) => {
 });
 ```
 
-### Render the `index` template
+### 3. Render the `index` template
 
 - Create a new directory called `foods` inside of the `views` directory. This will hold the templates for your `foods` pages. 
 
@@ -278,13 +281,13 @@ Implement the following user story:
 > AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
 
 
-### Conceptualize the `new` route
+### 1. Conceptualize the `new` route
 
 For your `new` page, you will use:
 
    - `GET` `/users/:userId/foods/new`
 
-### Define the `new` route
+### 2. Define the `new` route
 
 This route will render a page that displays a form to add a new item to the user's pantry. 
 
@@ -292,7 +295,7 @@ This route will render a page that displays a form to add a new item to the user
 - This route should `res.render()` a `new.ejs` view.
 - Add a "Add New Item" link to the `index` page and point it to your new route.
 
-### Render the `new` template
+### 3. Render the `new` template
 
 - Create a new template called `new.ejs` in the `views` directory.
 - This view should display a form to add a new food item to the user's pantry. Design your form based on the `foodschema` defined earlier.
@@ -304,14 +307,14 @@ Implement the following user story:
 
 > AAU, after filling out the pantry item form, I want to submit it and receive confirmation that the item has been saved in my pantry.
 
-### Conceptualize the `create` route
+### 1. Conceptualize the `create` route
 
 This route will:
 
 - `POST` to `/users/:userId/foods`
 
 
-### Define the `create` route
+### 2. Define the `create` route
 
 This route will create new `foods` in the embedded pantry array on the `user` model. 
 
@@ -327,7 +330,7 @@ Implement the following user story:
 
 > AAU, I need a dedicated page to view all items in my pantry, to easily manage and review what I have stored.
 
-### Build the `index` functionality
+### 1. Build the `index` functionality
 
 Refactor the `index` route to send all items in a user's pantry to the `index` view:
 
@@ -335,33 +338,33 @@ Refactor the `index` route to send all items in a user's pantry to the `index` v
 - Send all pantry items to the view via `res.locals`
 - If any errors, log them and redirect back home `/`.
 
-### Update the `index` template
+### 2. Update the `index` template
 
 - Use conditional rendering to display a list of pantry items or a message that reads "There are no items in this pantry."
 
-## Build the `edit` and `delete` functionality
+## Build `delete` route
 
 Implement the following user story:
 
 > AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
 
-### Conceptualize the `delete` route
+### 1. Conceptualize the `delete` route
 
 This route will:
 
 - `DELETE` to `/users/:userId/foods/:itemId`
 - Add `?_method=DELETE` to utilize the method override middleware
 
-### Define the `delete` route
+### 2. Define the `delete` route
 
 - Define the `delete` route in the `foods` controller
 
-### Add `delete` link to the `index` template
+### 3. Add `delete` link to the `index` template
 
 - Add a simple form element to each pantry item that posts to the `delete` route
 - The form should appear as a single `delete` button in the UI
 
-### Build the `delete` functionality
+### 4. Build the `delete` functionality
 
 This route will delete the food item from the user's pantry.
 
@@ -372,13 +375,17 @@ This route will delete the food item from the user's pantry.
 
 ## Build the `edit` page
 
-### Conceptualize the `edit` route
+Implement the following user story:
+
+> AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
+
+### 1. Conceptualize the `edit` route
 
 For your `edit` page, you will use:
 
 - `GET` `/users/:userId/foods/:itemId/edit`
 
-### Define the `edit` route
+### 2. Define the `edit` route
 
 This route will render a page that displays a form to edit a specific food item in the user's pantry.
 
@@ -387,7 +394,7 @@ This route will render a page that displays a form to edit a specific food item 
 - For a better user experience, Find the current food from the id supplied by `req.params` and provide it to the user in the edit form.
 - Add an edit link to each food item rendered on the index page.
 
-### Render the `edit` template
+### 3. Render the `edit` template
 
 - Create a new template called `edit.ejs` in the `views` directory.
 - This view should display a form to edit a specific food item in the user's pantry. Design your form based on the `foodschema` defined earlier.
@@ -396,18 +403,18 @@ This route will render a page that displays a form to edit a specific food item 
 
 ## Build the `update` functionality 
 
-### Conceptualize the `update` route
+### 1. Conceptualize the `update` route
 
 This route will:
 
 - `POST` to `/users/:userId/foods/:itemId`
 - Add `?_method=PUT` to utilize the method override middleware
 
-### Define the `update` route
+### 2. Define the `update` route
 
 - Define the update route in the `foods` controller
 
-### Build the `update` functionality
+### 3. Build the `update` functionality
 
 This route will update a specific food item from the user's pantry:
 
