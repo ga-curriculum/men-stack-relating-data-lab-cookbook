@@ -15,7 +15,7 @@ In this lab you'll create the Cookbook app, a dynamic pantry manager tailored fo
 
 ## Time to complete
 
-Estimated time to complete each core lab exercise: **4 hrs**
+Estimated time to complete each core lab exercise: **8 hrs**
 
 ## Starter code
 
