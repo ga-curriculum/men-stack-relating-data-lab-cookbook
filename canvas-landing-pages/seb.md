@@ -2,11 +2,11 @@
 
 ## About
 
-In this lab you'll create the CookBook app, a dynamic pantry manager tailored for cooking enthusiasts! This app is all about organization and inspiration. You'll be practicing relating data to a user model, crafting a smooth navigation experience, and fostering a community of other aspiring chefs. Users will have the power to perform full CRUD operations and manage their pantry items with ease. They'll also have the opportunity to explore other users' pantries, drawing inspiration and sharing their love for cooking.
+In this lab, you'll create **Cookbook**, a full-stack application for managing recipes and pantry items for cooking enthusiasts. As part of these exercises you'll practice relating data to a user model using either embedding or referencing techniques with Mongoose and perform full CRUD operations on multiple models. Additionally, users can explore other enthusiasts' profiles, sharing and drawing inspiration from their culinary experiences.
 
 ## Time to complete
 
-Estimated time to complete core lab exercise: **4 hrs**
+Estimated time to complete core lab exercise: **8 hrs**
 
 ## Starter code
 

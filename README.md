@@ -2,7 +2,7 @@
 
 ## About
 
-In this lab you'll create the Cookbook app, a dynamic recipe and pantry management system for cooking enthusiasts! This app is all about organization and inspiration. You'll be practicing relating data to a user model through either embedding or referencing with Mongoose. Users will have the power to perform full CRUD operations on multiple models and explore other users' profiles, drawing inspiration and sharing their love for cooking.
+In this lab, you'll create **Cookbook**, a full-stack application for managing recipes and pantry items for cooking enthusiasts. As part of these exercises you'll practice relating data to a user model using either embedding or referencing techniques with Mongoose and perform full CRUD operations on multiple models. Additionally, users can explore other enthusiasts' profiles, sharing and drawing inspiration from their culinary experiences.
 
 ## Prerequisites
 
