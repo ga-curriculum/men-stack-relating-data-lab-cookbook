@@ -457,7 +457,7 @@ Develop a user-friendly interface for ingredient input:
 - Make sure the interface is simple and meshes well with the recipe creation or editing process.
 - Consider UI elements like dropdowns, checkboxes, or input fields for ingredient selection. Consider which is the best approach and why?
 
-### Develope backend logic for new ingredients
+### Develop backend logic for new ingredients
 
 Create backend logic to handle the addition and association of ingredients:
 
