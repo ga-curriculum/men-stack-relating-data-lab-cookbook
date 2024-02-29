@@ -326,6 +326,38 @@ This route will create new `recipes` in the user's collection.
 - Redirect back to the recipe `index` view.
 - If any errors, log them and redirect back home `/`.
 
+### Setting the owner during recipe creation:
+
+When a recipe is created, set the `owner` field to the current user's ObjectId. This is usually available in the session data if the user is logged in.
+
+```js
+// In controllers/recipes.js, within the create route
+
+router.post('/', async (req, res) => {
+  try {
+    const newRecipe = new Recipe(req.body);
+    newRecipe.owner = req.session.userId; // Assuming the user's ID is stored in the session
+    await newRecipe.save();
+    // Redirect to recipe index or show page
+  } catch (error) {
+    // Handle errors
+  }
+});
+```
+
+### Future access control
+
+To ensure that users can only manage their own recipes, implement access control checks. Before allowing edit or delete operations, verify that the recipe's `owner` matches the current user's ID.
+
+```js
+// Example of an access control check
+if (recipe.owner.equals(req.session.userId)) {
+  // Proceed with edit or delete operation
+} else {
+  // Redirect or show an error message
+}
+```
+
 ## Add recipes to `index` page
 
 Implement the following user story:
