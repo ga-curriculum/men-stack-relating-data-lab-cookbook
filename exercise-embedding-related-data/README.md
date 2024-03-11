@@ -38,7 +38,7 @@ Begin by defining `foodSchema` in the `user` model file using the `new mongoose.
 // user.js
 
 const foodSchema = new mongoose.Schema({
-  // define properties of food schema
+  // YOU DO: Define properties of food schema
 });
 ```
 
@@ -56,19 +56,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pantry: // embed foodSchema here
+  pantry: // YOU DO: embed foodSchema here
 });
 ```
 
-An ERD (Entity-Relationship Diagram) will help you visualize the relationships between these entities:
+Take at look at this ERD (Entity-Relationship Diagram) to help you visualize the relationships between these entities, `User` and `foodSchema`:
 
 ![Cookbook App ERD](../assets/erd.png)
 
-> Additional sections of this lab explore relating data using referencing, for this exercise, you can ignore the schemas for recipe and ingredient. 
+> For this exercise, you can ignore the schemas for recipe and ingredient. Additional sections of this lab explore relating data using referencing. 
 
-## Define RESTful routes for managing data
+## RESTful routes for managing data
 
-Use this chart as a guide when building your RESTful routes.
+Reference this chart when building your RESTful routes in your controller.
 
 | Action   | Route                                     | HTTP Verb  |
 |----------|-------------------------------------------|------------|
@@ -80,7 +80,7 @@ Use this chart as a guide when building your RESTful routes.
 | Update   | '/users/:userId/foods/:itemId'            | PUT        |
 | Delete   | '/users/:userId/foods/:itemId'            | DELETE     |
 
-Because this data is embedded in the user model, our routes need to be structured to reflect that relationship.
+*Because this data is embedded in the user model, our routes are structured to reflect that relationship.*
 
 ## Structure and Setup
 
@@ -98,7 +98,7 @@ const router = express.Router();
 
 const User = require('../models/user.js');
 
-// todo: build your router logic here
+// router logic will go here - will be built later on in the lab
 
 module.exports = router;
 ```
@@ -132,9 +132,9 @@ Now you'll need to add two middleware functions to your application:
 
 Create a `middleware` folder in your project root. Inside this folder:
 
-Create a file named `is-signed-in.js`.
-
-- This function should include logic that checks if `req.session.user` exists, and if it does, allows the request to continue on the normal chain by invoking `next()`
+Create a file named `is-signed-in.js`.This function should:
+- include logic that checks if `req.session.user` exists.
+- If it does, allows the request to continue on the normal chain by invoking `next()`
 - If a user session does not exist, the user should be redirected to the sign in page.
 
 ```js
@@ -148,9 +148,9 @@ const isSignedIn = (req, res, next) => {
 module.exports = isSignedIn;
 ```
 
-Create a file named `pass-user-to-view.js`.
-
-- This function should include logic that assigns `req.session.user` to `res.locals.user` (available in our views). If no user is found, we set it to `null`. Then allow the request to continue on the normal chain by invoking `next()`.
+Create a file named `pass-user-to-view.js` in the same `middleware` folder. This function should:
+- include logic that assigns `req.session.user` to `res.locals.user` (available in our views). 
+- If no user is found, we set it to `null`. Then allow the request to continue on the normal chain by invoking `next()`.
 
 ```js
 // middleware/pass-user-to-view.js
@@ -171,7 +171,7 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 ```
 
-These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page. 
+*These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page.*
 
 For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, `isSignedIn` should come above the `foods` controller, but not before `auth`.
 
@@ -221,7 +221,7 @@ For the best user experience, you'll want to include this nav partial at the top
 <%- include('./partials/_navbar.ejs') %>
 ```
 
-With the nav partial included, you can now replace the hardcoded links on your homepage with a partial and some simple welcome text. 
+With the nav partial included, you can now replace the hardcoded links on your homepage (`views/index.ejs`) with a partial and some simple welcome text. 
 
 ```html
 <body>
@@ -242,7 +242,7 @@ For your landing page, you will use:
 
 ### 2. Define the `index` route
 
-- In your `foods` controller, create a new `index` route to serve as the landing page. Test by visiting `localhost:3000/users/foods`.
+- In your `foods` controller, create a new `index` route to serve as the landing page.
 - This route should `res.render()` a `index.ejs` view.
 
 ```js
@@ -270,16 +270,15 @@ router.get('/', (req, res) => {
   </body>
 </html>
 ```
+> Remember to insert your nav partial at the top of the body to keep the views consistent and create ease of navigation between pages. You'll want to add this to all your new pages.
 
-- Test your new route in the browser to confirm that everything renders correctly.
-
+Test your new route in the browser to confirm that everything renders correctly (hint: use the route in your nav bar).
 
 ## Build the `new` page
 
 Implement the following user story:
 
 > AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
-
 
 ### 1. Conceptualize the `new` route
 
@@ -371,6 +370,7 @@ This route will delete the food item from the user's pantry.
 - Look up the user from `req.session`
 - Use the `.deleteOne()` method to delete a food using the id supplied from `req.params`
 - Save changes to the `user`
+- Redirect back to the `index` view
 - If any errors, log them and redirect back home `/`.
 
 ## Build the `edit` page
@@ -385,14 +385,17 @@ For your `edit` page, you will use:
 
 - `GET` `/users/:userId/foods/:itemId/edit`
 
-### 2. Define the `edit` route
+### 2. Define the `edit` route and build `edit` funtionality
 
 This route will render a page that displays a form to edit a specific food item in the user's pantry.
 
-- In `controllers/foods.js`, create an `edit` route.
+- In `controllers/foods.js`, create an edit route.
+- Look up the user from `req.session`
+- Find the current food from the id using `req.params`
 - This route should `res.render()` an `edit.ejs` view.
-- For a better user experience, Find the current food from the id supplied by `req.params` and provide it to the user in the edit form.
-- Add an edit link to each food item rendered on the index page.
+- Send the current food to the view via `res.locals`
+- If any errors, log them and redirect back home `/`.
+- Back in the user's index page, add an edit link to each food item rendered.
 
 ### 3. Render the `edit` template
 

@@ -84,7 +84,15 @@ node_modules
 .env
 ```
 
-Run your application and test the authentication before you begin your lab. 
+## Install packages
+
+Install packages using the following command:
+
+``` bash
+npm i
+```
+
+**Run your application and test the authentication before you begin your lab.**
 
 
 Happy Coding! 
