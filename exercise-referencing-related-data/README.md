@@ -13,6 +13,7 @@ Use the following user stories to guide the functionality and features of your a
 - As a User (AAU), I want to sign up for an account and sign in, so that I can access my personal user profile and manage my recipes.
 - AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my recipes, or sign out, depending on my current status.
 - AAU, I need a dedicated page to view all my recipes, to easily manage and review what I have created.
+- AAU, I want to see the full details of each recipe I create.
 - AAU, I want to easily find and click on an 'Add New Recipe' link, which takes me to a form for adding new recipes to my collection.
 - AAU, after filling out the recipe form, I want to submit it and receive confirmation that the recipe has been saved.
 - AAU, I need the ability to edit and delete recipes in my collection, allowing me full control over managing my data.
@@ -105,7 +106,7 @@ const router = express.Router();
 const User = require('../models/user.js');
 const Recipe = require('../models/recipe.js');
 
-// todo: build your router logic here for recipes
+// router logic will go here - will be built later on in the lab
 
 module.exports = router;
 ```
@@ -377,6 +378,40 @@ Refactor the `index` route to send all recipes created by a user to the `index` 
 
 - Use conditional rendering to display a list of recipes or a message that reads "You have not created any recipes yet."
 
+## Build the `show` page
+
+Implement the following user story:
+
+> AAU, I want to see the full details of each recipe I create.
+
+### 1. Conceptualize the `show` recipe route
+
+This route will:
+
+- `GET` `/recipes/:recipeId`
+
+### 2. Define the `show` recipe route
+
+- Define the `show` route in the `recipes` controller
+
+### 3. Link each recipe to its show `show` page to the `index` template
+
+- Link each individual recipe to the `show` page with `/recipes/:recipeId`
+
+### 4. Build the `show` recipe functionality
+
+This route will show the individual recipe from the user's collection.
+
+- Look up the recipe using the id supplied by `req.params`
+- This route should `res.render()` a `show.ejs` view
+- Send the recipe to the view via `res.locals`
+- If any errors, log them and redirect back home `/`.
+
+### 5. Render the `show` recipe template
+
+- Create a new template called `show.ejs` in the `views/recipes` directory.
+- This view should display the user's full recipe.
+
 ## Build `delete` route
 
 Implement the following user story:
@@ -403,9 +438,9 @@ This route will:
 
 This route will delete the recipe from the user's collection.
 
-- Look up the user from `req.session`
-- Use the `.deleteOne()` method to delete a recipe using the id supplied from `req.params`
-- Save changes to the `user`
+- Look up the recipe using the id supplied by `req.params`
+- Use the `.deleteOne()` method to delete the recipe
+- Redirect to `/recipes`
 - If any errors, log them and redirect back home `/`.
 
 ## Build the `edit` recipe page
@@ -428,6 +463,7 @@ This route will render a page that displays a form to edit a specific recipe.
 - This route should `res.render()` an `edit.ejs` view.
 - Find the current recipe from the id supplied by `req.params` and provide it to the edit form.
 - Add an edit link to each recipe item rendered on the index page.
+- If any errors, log them and redirect back home `/`.
 
 ### 3. Render the `edit` recipe template
 
@@ -453,11 +489,9 @@ This route will:
 
 This route will update a specific recipe:
 
-- Find the user from `req.session`
 - Find the current recipe from the id supplied by `req.params`
-- Use the `.set()` method, updating the current recipe to reflect the new form data on `req.body`
-- Save the current `user`
-- Redirect back to the `index` view
+- Use the `.save()` method, updating the current recipe to reflect the new form data on `req.body`
+- Redirect back to the `show` view
 - If any errors, log them and redirect back home `/`.
 
 Now that you have full crud functionality for recipes, test each route end to end and check for errors before moving on.
