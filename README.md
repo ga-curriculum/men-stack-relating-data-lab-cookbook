@@ -8,9 +8,12 @@ In this lab, you'll create **Cookbook**, a full-stack application for managing r
 
 - Mongoose Relationships
 
-### One Relating Data Module
+### Choose One
 
 - MEN Stack Embedding Related Data
+
+  OR
+
 - MEN Stack Referencing Related Data
 
 ## Time to complete
@@ -25,9 +28,11 @@ Estimated time to complete each core lab exercise: **8 hrs**
 
 - [Setup](./setup/README.md)
 
-- [Exercise: MEN Stack Embedding Related Data](./exercise-embedding-related-data/README.md)
+### Choose your path:
 
-- [Exercise: MEN Stack Referencing Related Data](./exercise-referencing-related-data/README.md)
+- Path 1: [Exercise: MEN Stack Embedding Related Data](./exercise-embedding-related-data/README.md)
+
+- Path 2: [Exercise: MEN Stack Referencing Related Data](./exercise-referencing-related-data/README.md)
 
 ## Solution code
 
