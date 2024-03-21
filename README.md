@@ -8,6 +8,7 @@ In this lab, you'll create **Cookbook**, a full-stack application for managing r
 
 - Mongoose Relationships
 - MEN Stack Embedding Related Data
+
 OR
 - MEN Stack Referencing Related Data
 
