@@ -10,13 +10,13 @@ Estimated time to complete each core lab exercise: **8 hrs**
 
 ## Content
 
-- [Setup](./setup/README.md)
+- [Setup](../setup/README.md)
 
 ### Choose your path:
 
-- Path 1: [Exercise: MEN Stack Embedding Related Data](./exercise-embedding-related-data/README.md)
+- Path 1: [Exercise: MEN Stack Embedding Related Data](../exercise-embedding-related-data/README.md)
 
-- Path 2: [Exercise: MEN Stack Referencing Related Data](./exercise-referencing-related-data/README.md)
+- Path 2: [Exercise: MEN Stack Referencing Related Data](../exercise-referencing-related-data/README.md)
 
 ## Starter code
 
