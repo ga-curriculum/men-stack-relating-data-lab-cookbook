@@ -4,10 +4,6 @@
 
 In this lab, you'll create **Cookbook**, a full-stack application for managing recipes and pantry items for cooking enthusiasts. As part of these exercises you'll practice relating data to a user model using either embedding or referencing techniques with Mongoose and perform full CRUD operations on multiple models. Additionally, users can explore other enthusiasts' profiles, sharing and drawing inspiration from their culinary experiences.
 
-## Time to complete
-
-Estimated time to complete each core lab exercise: **8 hrs**
-
 ## Content
 
 - [Setup](../setup/README.md)
