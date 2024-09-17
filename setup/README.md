@@ -15,7 +15,7 @@ This lab uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modul
 Navigate to the [MEN Stack Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
 
 ```bash
-git clone git@git.generalassemb.ly:modular-curriculum-all-courses/men-stack-session-auth-template.git
+git clone https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template.git
 ```
 
 Once cloned, rename this application to today's lab `men-stack-relating-data-lab-cookbook`:
