@@ -1,4 +1,7 @@
-# ![MEN Stack Relating Data Lab - Cookbook - Exercise](./assets/hero.png)
+<h1>
+  <span class="headline">MEN Stack Relating Data Lab Cookbook</span>
+  <span class="subhead">Exercise Referencing Related Data</span>
+</h1>
 
 ## Introduction
 
@@ -30,20 +33,20 @@ In this lab, your task is to create two primary models: `Recipe` and `Ingredient
 
 Create a new file in `models` called `recipe.js`. Create a mongoose schema with the following properties:
 
-| Property     | Type                             | Required  | Description                                      |
-|--------------|----------------------------------|-----------|--------------------------------------------------|
-| name         | String                           | true      | The name of the recipe.                          |
-| instructions | String                           | false     | The cooking instructions for the recipe.         |
-| owner        | mongoose.Schema.Types.ObjectId   | true      | A reference to the `User` model.                 |
-| ingredients  | [mongoose.Schema.Types.ObjectId] | false     | An array of references to the `Ingredient` model.|
+| Property     | Type                             | Required | Description                                       |
+| ------------ | -------------------------------- | -------- | ------------------------------------------------- |
+| name         | String                           | true     | The name of the recipe.                           |
+| instructions | String                           | false    | The cooking instructions for the recipe.          |
+| owner        | mongoose.Schema.Types.ObjectId   | true     | A reference to the `User` model.                  |
+| ingredients  | [mongoose.Schema.Types.ObjectId] | false    | An array of references to the `Ingredient` model. |
 
 ### Create the `Ingredient` schema
 
 Create a new file in `models` called `ingredient.js`. Create a mongoose schema with the following properties:
 
-| Property     | Type     | Required  | Description                      |
-|--------------|----------|-----------|----------------------------------|
-| name         | String   | true      | The name of the ingredient.      |
+| Property | Type   | Required | Description                 |
+| -------- | ------ | -------- | --------------------------- |
+| name     | String | true     | The name of the ingredient. |
 
 ### Referencing Data
 
@@ -65,29 +68,29 @@ Use the following charts as guides when building your RESTful routes.
 
 ### Recipe routes
 
-| Action | Route                                   | HTTP Verb |
-|--------|-----------------------------------------|-----------|
-| Index  | `/recipes`                              | GET       |
-| New    | `/recipes/new`                          | GET       |
-| Create | `/recipes`                              | POST      |
-| Show   | `/recipes/:recipeId`                    | GET       |
-| Edit   | `/recipes/:recipeId/edit`               | GET       |
-| Update | `/recipes/:recipeId`                    | PUT       |
-| Delete | `/recipes/:recipeId`                    | DELETE    |
+| Action | Route                     | HTTP Verb |
+| ------ | ------------------------- | --------- |
+| Index  | `/recipes`                | GET       |
+| New    | `/recipes/new`            | GET       |
+| Create | `/recipes`                | POST      |
+| Show   | `/recipes/:recipeId`      | GET       |
+| Edit   | `/recipes/:recipeId/edit` | GET       |
+| Update | `/recipes/:recipeId`      | PUT       |
+| Delete | `/recipes/:recipeId`      | DELETE    |
 
 ### Ingredient routes
 
-| Action | Route                                                | HTTP Verb |
-|--------|------------------------------------------------------|-----------|
-| Index  | `/ingredients`                                       | GET       |
-| New    | `/ingredients/new`                                   | GET       |
-| Create | `/ingredients`                                       | POST      |
-| Show   | `/ingredients/:ingredientId`                         | GET       |
-| Edit   | `/ingredients/:ingredientId/edit`                    | GET       |
-| Update | `/ingredients/:ingredientId`                         | PUT       |
-| Delete | `/ingredients/:ingredientId`                         | DELETE    |
+| Action | Route                             | HTTP Verb |
+| ------ | --------------------------------- | --------- |
+| Index  | `/ingredients`                    | GET       |
+| New    | `/ingredients/new`                | GET       |
+| Create | `/ingredients`                    | POST      |
+| Show   | `/ingredients/:ingredientId`      | GET       |
+| Edit   | `/ingredients/:ingredientId/edit` | GET       |
+| Update | `/ingredients/:ingredientId`      | PUT       |
+| Delete | `/ingredients/:ingredientId`      | DELETE    |
 
-> Note: you may **not** need ***all*** of these routes and views in your application
+> Note: you may **not** need **_all_** of these routes and views in your application
 
 ## Structure and Setup
 
@@ -111,7 +114,7 @@ const Recipe = require('../models/recipe.js');
 module.exports = router;
 ```
 
-Repeat this process for the `ingredients` controller. 
+Repeat this process for the `ingredients` controller.
 
 ### 2. Use the controllers in server
 
@@ -140,7 +143,7 @@ app.use('/ingredients', ingredientsController);
 Now you'll need to add two middleware functions to your application:
 
 - one that restricts access to logged-in users only
-- one that makes the user object available to view templates via `res.locals`. 
+- one that makes the user object available to view templates via `res.locals`.
 
 Create a `middleware` folder in your project root. Inside this folder:
 
@@ -168,11 +171,11 @@ Create a file named `pass-user-to-view.js`.
 // middleware/pass-user-to-view.js
 
 const passUserToView = (req, res, next) => {
-  res.locals.user = req.session.user ? req.session.user : null
-  next()
-}
+  res.locals.user = req.session.user ? req.session.user : null;
+  next();
+};
 
-module.exports = passUserToView
+module.exports = passUserToView;
 ```
 
 Import and include both middleware functions above all of the routes and controllers in `server.js.`.
@@ -183,7 +186,7 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 ```
 
-These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page. 
+These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page.
 
 ```js
 // server.js
@@ -215,7 +218,6 @@ Create a nav inside `_navbar.ejs`:
 - If a `user` is signed in, they should see links to "View my Recipes" or "Sign Out".
 - If a `user` is not signed in, they should see links to "Sign In" or "Sign Up".
 
-
 For the best user experience, you'll want to include this nav partial at the top of all of your existing templates.
 
 ```html
@@ -239,7 +241,7 @@ With the main structure of the application complete, it's time to start building
 
 For your landing page, you will use:
 
-   - `GET` `/recipes`
+- `GET` `/recipes`
 
 Implement the following user story:
 
@@ -258,7 +260,7 @@ router.get('/', async (req, res) => {
 
 ### 3. Render the `index` template for Recipes
 
-- Create a new directory called `recipes` inside of the `views` directory. This will hold the templates for your `recipes` pages. 
+- Create a new directory called `recipes` inside of the `views` directory. This will hold the templates for your `recipes` pages.
 
 - Create an `index.ejs` file in `recipes`. Add a basic HTML boilerplate to this file and include a list to display all recipes.
 
@@ -266,8 +268,8 @@ router.get('/', async (req, res) => {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Recipes</title>
   </head>
   <body>
@@ -276,8 +278,7 @@ router.get('/', async (req, res) => {
 </html>
 ```
 
-- Test your new route in the browser to confirm that everything renders correctly. 
-
+- Test your new route in the browser to confirm that everything renders correctly.
 
 ## Build the `new` recipe page
 
@@ -289,11 +290,11 @@ Implement the following user story:
 
 For your `new` recipe page, you will use:
 
-   - `GET` `/recipes/new`
+- `GET` `/recipes/new`
 
 ### 2. Define the `new` recipe route
 
-This route will render a page that displays a form to add a new recipe. 
+This route will render a page that displays a form to add a new recipe.
 
 - In `controllers/recipes.js`, create a `new` route.
 - This route should `res.render()` a `new.ejs` view.
@@ -319,7 +320,7 @@ This route will:
 
 ### 2. Define the `create` recipe route
 
-This route will create new `recipes` in the user's collection. 
+This route will create new `recipes` in the user's collection.
 
 - Look up the user from `req.session`
 - Create a new `Recipe` object using `req.body` and assign the user's `_id` as the owner.
@@ -332,13 +333,14 @@ This route will create new `recipes` in the user's collection.
 When a recipe is created, set the `owner` field to the current user's ObjectId. This is usually available in the session data if the user is logged in.
 
 Example:
+
 ```js
 // In controllers/recipes.js, within the create route
 
 router.post('/', async (req, res) => {
   try {
     const newRecipe = new Recipe(req.body);
-    newRecipe.owner = req.session.user._id
+    newRecipe.owner = req.session.user._id;
     await newRecipe.save();
     // Redirect to recipe index or show page
   } catch (error) {
@@ -472,7 +474,7 @@ This route will render a page that displays a form to edit a specific recipe.
 - Auto-fill the form with the `recipe` data supplied from the route.
 - The form action will `POST` to the `update` route.
 
-## Build the `update` recipe functionality 
+## Build the `update` recipe functionality
 
 ### 1. Conceptualize the `update` recipe route
 
@@ -500,7 +502,7 @@ Now that you have full crud functionality for recipes, test each route end to en
 
 ## Connect `Ingredients` to `Recipes`
 
-In this part of the lab, you'll integrate an `Ingredient` model into the `Recipe` creation and management process. 
+In this part of the lab, you'll integrate an `Ingredient` model into the `Recipe` creation and management process.
 
 **We've intentionally provided less guidance in this section to encourage creative problem-solving.**
 
@@ -509,7 +511,7 @@ Implement the following user stories:
 > AAU, I want to be able to add new ingredients to my recipe manager. This way, I can keep track of the different ingredients I use across various recipes.
 > AAU, when adding a new recipe, I want an option to quickly add ingredients that are not already in my list. This will streamline the process of recipe creation, ensuring I can include all necessary ingredients without navigating away from the recipe form.
 
-After you've achieved full CRUD functionality for recipes, your next step will be to integrate ingredients. Start by creating a simple list of all ingredients `GET /ingredients` and a form to add new ones `POST /ingredients`. Then, focus on allowing users to add these ingredients to their recipes. How and where you choose to make those relationships is up to you. 
+After you've achieved full CRUD functionality for recipes, your next step will be to integrate ingredients. Start by creating a simple list of all ingredients `GET /ingredients` and a form to add new ones `POST /ingredients`. Then, focus on allowing users to add these ingredients to their recipes. How and where you choose to make those relationships is up to you.
 
 ### Ingredient routes and logic
 
@@ -539,9 +541,7 @@ Instead, consider:
 
 - Would you implement a check in the view to inform users of existing ingredients, or would you handle duplicates in the backend logic during ingredient addition?
 
-
 As you progress through this section of the lab, keep in mind the simplicity and functionality of your application. While it might be tempting to create a comprehensive system for managing ingredients, sometimes less is more. Focus on the routes and views that are essential for a smooth user experience.
-
 
 ### Congrats! You have reached MVP! 🎉
 
@@ -555,7 +555,7 @@ Implement the following user story:
 
 > AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
 
-To meet this requirement you will need a new `users` controller and `views` directory for `users`. 
+To meet this requirement you will need a new `users` controller and `views` directory for `users`.
 
 - Create a simple `/users` controller with an `index` route to get all users.
 - Connect your new controller in `server.js`
@@ -570,7 +570,7 @@ Implement the following user story:
 
 > AAU, I want the option to click on another user's profile and view all their recipes, to exchange ideas or find inspiration for my own recipes.
 
-From the community page, users should be able to click on the names of other users and see their recipes. This requires one final route and view. 
+From the community page, users should be able to click on the names of other users and see their recipes. This requires one final route and view.
 
 - Create a `show` route in your `/users` controller
 - Create a `show.ejs` in the `users` views directory
@@ -578,4 +578,4 @@ From the community page, users should be able to click on the names of other use
 - On each user's `show` page, render a list of that user's recipes.
 - This list should be read-only.
 
-Test your new community page. 
+Test your new community page.

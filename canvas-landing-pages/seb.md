@@ -1,4 +1,7 @@
-# ![MEN Stack Relating Data Lab - Cookbook](../assets/hero.png)
+<h1>
+  <span class="prefix">MEN Stack Relating Data Lab</span>
+  <span class="headline">Cookbook</span>
+</h1>
 
 ## About
 
@@ -14,6 +17,8 @@ In this lab, you'll create **Cookbook**, a full-stack application for managing r
 
 - Path 2: [Exercise: MEN Stack Referencing Related Data](../exercise-referencing-related-data/README.md)
 
-## Starter code
+### Starter code
+
+This lecture uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
 
 🟢 [Starter code](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template)

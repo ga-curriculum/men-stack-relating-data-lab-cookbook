@@ -1,19 +1,16 @@
-# ![Release Notes](../assets/release-notes.png)
+<h1>
+  <span class="headline">MEN Stack Relating Data Lab Cookbook</span>
+  <span class="subhead">Release Notes</span>
+</h1>
 
-## Version 1.0 - Updates from legacy content
+## Version 1.0 - New
 
-This release modularizes the legacy [tktk previous lab name] lab and provides some other minor updates detailed below.
+This module is a new addition to our content library.
 
 ### Release details
 
 #### Additions
 
-
-
 #### Changes
 
-
-
 #### Removals
-
-

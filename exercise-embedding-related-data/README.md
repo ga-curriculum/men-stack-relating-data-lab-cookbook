@@ -1,4 +1,7 @@
-# ![MEN Stack Relating Data Lab - Cookbook - Exercise](./assets/hero.png)
+<h1>
+  <span class="headline">MEN Stack Relating Data Lab Cookbook</span>
+  <span class="subhead">Exercise Embedding Related Data</span>
+</h1>
 
 ## Introduction
 
@@ -10,27 +13,26 @@ In this lab you'll create the Cookbook app, a dynamic pantry manager for cooking
 
 Use the following user stories to guide the functionality and features of your application:
 
-  - As a User (AAU), I want to sign up for an account and sign in, so that I can access my personal user profile and manage my pantry.
-  - AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my pantry, or sign out, depending on my current status.
-  - AAU, I need a dedicated page to view all items in my pantry, to easily manage and review what I have stored.
-  - AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
-  - AAU, after filling out the pantry item form, I want to submit it and receive confirmation that the item has been saved in my pantry.
-  - AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
-  - AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
-  - AAU, I want the option to click on another user's profile and view all the items in their pantry, to exchange ideas or find inspiration for my own pantry.
+- As a User (AAU), I want to sign up for an account and sign in, so that I can access my personal user profile and manage my pantry.
+- AAU, I want an easy and consistent way to navigate through the site, whether I am signed in or not. I need to quickly access options to sign up, sign in, view my pantry, or sign out, depending on my current status.
+- AAU, I need a dedicated page to view all items in my pantry, to easily manage and review what I have stored.
+- AAU, I want to easily find and click on an 'Add New Item' link, which takes me to a form for adding new items to my pantry
+- AAU, after filling out the pantry item form, I want to submit it and receive confirmation that the item has been saved in my pantry.
+- AAU, I need the ability to edit and delete items in my pantry, allowing me full control over managing my stored items.
+- AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
+- AAU, I want the option to click on another user's profile and view all the items in their pantry, to exchange ideas or find inspiration for my own pantry.
 
 ## Data modeling and ERD
 
 Your task is to create a `Pantry`, an embedded array within the `User` model. This array represents the user's collection of food items. Because the pantry holds foods, the name of our schema will be `foodSchema`.
 
-
 ### Create the `Food` schema
 
 Each user's pantry will contain an array of `foods`, each defined by a simple schema:
 
-| Property        | Type     | Required  |
-|-----------------|----------|-----------|
-| name            | String   | true      |
+| Property | Type   | Required |
+| -------- | ------ | -------- |
+| name     | String | true     |
 
 Begin by defining `foodSchema` in the `user` model file using the `new mongoose.Schema` method. Include the necessary properties for food items.
 
@@ -42,7 +44,7 @@ const foodSchema = new mongoose.Schema({
 });
 ```
 
-### Embed `foodSchema` in `userSchema` 
+### Embed `foodSchema` in `userSchema`
 
 Next, modify `userSchema` to include the `foodSchema`. Do this by adding a property named `pantry`. This property will utilize the `foodSchema` to represent a list of food items associated with a user.
 
@@ -64,23 +66,23 @@ Take at look at this ERD (Entity-Relationship Diagram) to help you visualize the
 
 ![Cookbook App ERD](../assets/erd.png)
 
-> For this exercise, you can ignore the schemas for recipe and ingredient. Additional sections of this lab explore relating data using referencing. 
+> For this exercise, you can ignore the schemas for recipe and ingredient. Additional sections of this lab explore relating data using referencing.
 
 ## RESTful routes for managing data
 
 Reference this chart when building your RESTful routes in your controller.
 
-| Action   | Route                                     | HTTP Verb  |
-|----------|-------------------------------------------|------------|
-| Index    | '/users/:userId/foods'                    | GET        |
-| New      | '/users/:userId/foods/new'                | GET        |
-| Create   | '/users/:userId/foods'                    | POST       |
-| Show     | '/users/:userId/foods/:itemId'            | GET        |
-| Edit     | '/users/:userId/foods/:itemId/edit'       | GET        |
-| Update   | '/users/:userId/foods/:itemId'            | PUT        |
-| Delete   | '/users/:userId/foods/:itemId'            | DELETE     |
+| Action | Route                               | HTTP Verb |
+| ------ | ----------------------------------- | --------- |
+| Index  | '/users/:userId/foods'              | GET       |
+| New    | '/users/:userId/foods/new'          | GET       |
+| Create | '/users/:userId/foods'              | POST      |
+| Show   | '/users/:userId/foods/:itemId'      | GET       |
+| Edit   | '/users/:userId/foods/:itemId/edit' | GET       |
+| Update | '/users/:userId/foods/:itemId'      | PUT       |
+| Delete | '/users/:userId/foods/:itemId'      | DELETE    |
 
-*Because this data is embedded in the user model, our routes are structured to reflect that relationship.*
+_Because this data is embedded in the user model, our routes are structured to reflect that relationship._
 
 ## Structure and Setup
 
@@ -108,7 +110,6 @@ module.exports = router;
 - Import the foods controller in `server.js`.
 - Use middleware to direct incoming requests to `/users/:userId/foods` to the foods controller.
 
-
 ```js
 // server.js
 
@@ -120,7 +121,7 @@ const foodsController = require('./controllers/foods.js');
 // server.js
 
 app.use('/auth', authController);
-app.use('/users/:userId/foods',foodsController);
+app.use('/users/:userId/foods', foodsController);
 ```
 
 ## Add middleware
@@ -128,11 +129,12 @@ app.use('/users/:userId/foods',foodsController);
 Now you'll need to add two middleware functions to your application:
 
 - one that restricts access to logged-in users only
-- one that makes the user object available to view templates via `res.locals`. 
+- one that makes the user object available to view templates via `res.locals`.
 
 Create a `middleware` folder in your project root. Inside this folder:
 
 Create a file named `is-signed-in.js`.This function should:
+
 - include logic that checks if `req.session.user` exists.
 - If it does, allows the request to continue on the normal chain by invoking `next()`
 - If a user session does not exist, the user should be redirected to the sign in page.
@@ -149,18 +151,19 @@ module.exports = isSignedIn;
 ```
 
 Create a file named `pass-user-to-view.js` in the same `middleware` folder. This function should:
-- include logic that assigns `req.session.user` to `res.locals.user` (available in our views). 
+
+- include logic that assigns `req.session.user` to `res.locals.user` (available in our views).
 - If no user is found, we set it to `null`. Then allow the request to continue on the normal chain by invoking `next()`.
 
 ```js
 // middleware/pass-user-to-view.js
 
 const passUserToView = (req, res, next) => {
-  res.locals.user = req.session.user ? req.session.user : null
-  next()
-}
+  res.locals.user = req.session.user ? req.session.user : null;
+  next();
+};
 
-module.exports = passUserToView
+module.exports = passUserToView;
 ```
 
 Import and include both middleware functions above all of the routes and controllers in `server.js.`.
@@ -171,18 +174,18 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 ```
 
-*These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page.*
+_These middleware functions should run before any routes that check for a valid user or require a user to be signed in to view a page._
 
 For this application, users must be signed in to view any of the routes associated with their pantry. Therefore, `isSignedIn` should come above the `foods` controller, but not before `auth`.
 
 ```js
-app.use(passUserToView)
+app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
-app.use('/users/:userId/foods',foodsController);
+app.use('/users/:userId/foods', foodsController);
 ```
 
-You are now ready to begin building your protected routes. 
+You are now ready to begin building your protected routes.
 
 ## Build the `nav` partial
 
@@ -195,7 +198,7 @@ Currently the links for "Sign up" or "Sign in" are hardcoded onto the homepage. 
 - Create a directory called `partials` inside the `views` directory.
 - Inside partials, create a new file called `_navbar.ejs`
 
-Create a nav  inside `_navbar.ejs`:
+Create a nav inside `_navbar.ejs`:
 
 - This nav should have a `home` link displayed on every page.
 - Other links should be rendered conditionally based on whether or not a `user` is signed in.
@@ -206,11 +209,11 @@ Create a nav  inside `_navbar.ejs`:
 <nav>
   <a href="/">Home</a>
   <% if(user) { %>
-    <a href="/users/<%=user._id%>/foods">View my Pantry</a>
-    <a href="/auth/sign-out">Sign Out</a>
+  <a href="/users/<%=user._id%>/foods">View my Pantry</a>
+  <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
-    <a href="/auth/sign-in">Sign In</a>
-    <a href="/auth/sign-up">Sign Up</a>
+  <a href="/auth/sign-in">Sign In</a>
+  <a href="/auth/sign-up">Sign Up</a>
   <% } %>
 </nav>
 ```
@@ -221,7 +224,7 @@ For the best user experience, you'll want to include this nav partial at the top
 <%- include('./partials/_navbar.ejs') %>
 ```
 
-With the nav partial included, you can now replace the hardcoded links on your homepage (`views/index.ejs`) with a partial and some simple welcome text. 
+With the nav partial included, you can now replace the hardcoded links on your homepage (`views/index.ejs`) with a partial and some simple welcome text.
 
 ```html
 <body>
@@ -238,7 +241,7 @@ With the main structure of the application complete, it's time to start building
 
 For your landing page, you will use:
 
-   - `GET` `/users/:userId/foods`
+- `GET` `/users/:userId/foods`
 
 ### 2. Define the `index` route
 
@@ -247,13 +250,13 @@ For your landing page, you will use:
 
 ```js
 router.get('/', (req, res) => {
-  res.render('foods/index.ejs')
+  res.render('foods/index.ejs');
 });
 ```
 
 ### 3. Render the `index` template
 
-- Create a new directory called `foods` inside of the `views` directory. This will hold the templates for your `foods` pages. 
+- Create a new directory called `foods` inside of the `views` directory. This will hold the templates for your `foods` pages.
 
 - Create an `index.ejs` file in `foods`. Add a basic HTML boilerplate to this file.
 
@@ -261,8 +264,8 @@ router.get('/', (req, res) => {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Pantry</title>
   </head>
   <body>
@@ -270,6 +273,7 @@ router.get('/', (req, res) => {
   </body>
 </html>
 ```
+
 > Remember to insert your nav partial at the top of the body to keep the views consistent and create ease of navigation between pages. You'll want to add this to all your new pages.
 
 Test your new route in the browser to confirm that everything renders correctly (hint: use the route in your nav bar).
@@ -284,11 +288,11 @@ Implement the following user story:
 
 For your `new` page, you will use:
 
-   - `GET` `/users/:userId/foods/new`
+- `GET` `/users/:userId/foods/new`
 
 ### 2. Define the `new` route
 
-This route will render a page that displays a form to add a new item to the user's pantry. 
+This route will render a page that displays a form to add a new item to the user's pantry.
 
 - In `controllers/foods.js`, create a `new` route.
 - This route should `res.render()` a `new.ejs` view.
@@ -312,10 +316,9 @@ This route will:
 
 - `POST` to `/users/:userId/foods`
 
-
 ### 2. Define the `create` route
 
-This route will create new `foods` in the embedded pantry array on the `user` model. 
+This route will create new `foods` in the embedded pantry array on the `user` model.
 
 - Look up the user from `req.session`
 - Push `req.body` (the new form data object) to the `pantry` array of the current user.
@@ -404,7 +407,7 @@ This route will render a page that displays a form to edit a specific food item 
 - Auto-fill the form with the `food` data supplied from the route.
 - The form action will `POST` to the `update` route.
 
-## Build the `update` functionality 
+## Build the `update` functionality
 
 ### 1. Conceptualize the `update` route
 
@@ -428,7 +431,7 @@ This route will update a specific food item from the user's pantry:
 - Redirect back to the `index` view
 - If any errors, log them and redirect back home `/`.
 
-Now that you have full crud functionality, test each route end to end and check for errors before moving on. 
+Now that you have full crud functionality, test each route end to end and check for errors before moving on.
 
 ## Add a Community page
 
@@ -438,7 +441,7 @@ Implement the following user story:
 
 > AAU, I am interested in viewing a list of all other app users, to foster a sense of community and interaction within the app.
 
-To meet this requirement you will need a new `users` controller and `views` directory for `users`. 
+To meet this requirement you will need a new `users` controller and `views` directory for `users`.
 
 - Create a simple `/users` controller with an `index` route to get all users.
 - Connect your new controller in `server.js`
@@ -453,7 +456,7 @@ Implement the following user story:
 
 > AAU, I want the option to click on another user's profile and view all the items in their pantry, to exchange ideas or find inspiration for my own pantry.
 
-From the community page, users should be able to click on the names of other users and see their pantry. This requires one final route and view. 
+From the community page, users should be able to click on the names of other users and see their pantry. This requires one final route and view.
 
 - Create a `show` route in your `/users` controller
 - Create a `show.ejs` in the `users` views directory
@@ -461,6 +464,6 @@ From the community page, users should be able to click on the names of other use
 - On each user's `show` page, render a list of that user's pantry items.
 - This list should be read-only.
 
-Test your new community page. 
+Test your new community page.
 
 ### Congrats! You have reached MVP! 🎉

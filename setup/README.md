@@ -1,4 +1,7 @@
-# ![MEN Stack Relating Data Lab - Cookbook - Setup](./assets/hero.png)
+<h1>
+  <span class="headline">MEN Stack Relating Data Lab Cookbook</span>
+  <span class="subhead">Setup</span>
+</h1>
 
 ## Setup
 
@@ -38,7 +41,6 @@ rm -rf .git
 
 > Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
 
-
 ## GitHub setup
 
 To add this project to GitHub, initialize a new Git repository:
@@ -49,7 +51,7 @@ git add .
 git commit -m "init commit"
 ```
 
-Make a new repository on [GitHub](https://github.com/) named `men-stack-relating-data-lab-cookbook`. 
+Make a new repository on [GitHub](https://github.com/) named `men-stack-relating-data-lab-cookbook`.
 
 Link your local project to your remote GitHub repo:
 
@@ -68,7 +70,7 @@ code .
 
 ## Create your .env
 
-Add a `.env` file to your application and add the following secret keys to your application. 
+Add a `.env` file to your application and add the following secret keys to your application.
 
 ```text
 MONGODB_URI=
@@ -88,11 +90,10 @@ node_modules
 
 Install packages using the following command:
 
-``` bash
+```bash
 npm i
 ```
 
 **Run your application and test the authentication before you begin your lab.**
 
-
-Happy Coding! 
+Happy Coding!
