@@ -30,7 +30,7 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Exercise Embedding Related Data",
+          "friendlyName": "Exercise: Embedding Related Data",
           "dirName": "exercise-embedding-related-data",
           "type": "Content",
           "skill": "",
@@ -40,7 +40,7 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Exercise Referencing Related Data",
+          "friendlyName": "Exercise: Referencing Related Data",
           "dirName": "exercise-referencing-related-data",
           "type": "Content",
           "skill": "",
@@ -89,7 +89,7 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Exercise Embedding Related Data",
+          "friendlyName": "Exercise: Embedding Related Data",
           "dirName": "exercise-embedding-related-data",
           "type": "Content",
           "skill": "",
@@ -99,7 +99,7 @@
           "estimatedDeliveryTimeInMinutes": 0
         },
         {
-          "friendlyName": "Exercise Referencing Related Data",
+          "friendlyName": "Exercise: Referencing Related Data",
           "dirName": "exercise-referencing-related-data",
           "type": "Content",
           "skill": "",

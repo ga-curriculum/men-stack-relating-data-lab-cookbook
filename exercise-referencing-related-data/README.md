@@ -1,6 +1,6 @@
 <h1>
   <span class="headline">MEN Stack Relating Data Lab Cookbook</span>
-  <span class="subhead">Exercise Referencing Related Data</span>
+  <span class="subhead">Exercise: Referencing Related Data</span>
 </h1>
 
 ## Introduction
