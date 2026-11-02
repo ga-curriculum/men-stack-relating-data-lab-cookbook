@@ -13,18 +13,18 @@ cd ~/code/ga/labs
 
 ## Cloning the Auth boilerplate
 
-This lab uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
+This lab uses the [`MEN Stack Auth Template`](https://github.com/ga-curriculum/men-stack-session-auth-template-v2) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
 
-Navigate to the [MEN Stack Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) and clone the repository to your machine:
+Navigate to the [MEN Stack Auth Template](https://github.com/ga-curriculum/men-stack-session-auth-template-v2) and clone the repository to your machine:
 
 ```bash
-git clone https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template.git
+git clone https://github.com/ga-curriculum/men-stack-session-auth-template-v2.git
 ```
 
 Once cloned, rename this application to today's lab `men-stack-relating-data-lab-cookbook`:
 
 ```bash
-mv men-stack-session-auth-template men-stack-relating-data-lab-cookbook
+mv men-stack-session-auth-template-v2 men-stack-relating-data-lab-cookbook
 ```
 
 Next, `cd` into your renamed directory:
